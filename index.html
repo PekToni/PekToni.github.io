@@ -23,7 +23,7 @@
 			<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 border border-secondary">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item">
-                        <a class="nav-link text-primary" href="index.html">Me</a>
+                        <a class="nav-link text-primary" href="index.html">Portfolio</a>
                     </li>
 				</ul>
 			</nav>
@@ -55,8 +55,8 @@
 					</section>
                     <section class="pt-2">
                         <h5><b>Alkusanat</b></h5>
-							<p>Olin mukana peliprojektissa jossa luotiin virtual reality -laitteistolle kauhupeliä nimeltä Virtual Shock. Tiimin nimi on Team TBD. Tehtäväni oli tehdä toteutus peliin, jolla kerätään tietokantaan pelidataa pelisessioista. Tätä pelidataa voidaan näyttää pelaajille web-sovelluksessa, joka toimii myös pelin sivustona. Sivustolla voi myös lukea uutisia, tietoa pelistä, tiimistä ja ottaa yhteyttä pelitiimiin. Tiimin jäsenet voivan lisätä uutisia ja muokata sivustolla näkyvää informaatiota. Pelin omistavat henkilöt voivat rekisteröidä oman pelinsä sivustolle, mikäli haluavat tutkia pelisessioista kerättyä dataa.</p>
-							<p>Käyn läpi statistiikan keräämiseen liittyviä asioita, sillä ne olivat tämän sovelluksen lähtökohta. Lisäksi näytän kuinka statistiikka esitetään web-sovelluksessa. Asioita tulen näyttämään backendistä, frontendistä, pelistä ja tietokannasta.</p>
+							<p>Olin mukana peliprojektissa jossa luotiin virtual reality -laitteistolle kauhupeliä nimeltä Virtual Shock. Tiimin nimi on Team TBD. Tehtäväni oli tehdä toteutus peliin, jolla kerätään tietokantaan pelidataa pelisessioista. Tätä pelidataa voidaan näyttää pelaajille web-sovelluksessa, joka toimii myös pelin sivustona. Sivustolla on myös sisällönhallinnallisia ominaisuuksia. Sivustolla voi myös lukea uutisia, tietoa pelistä, tiimistä ja ottaa yhteyttä pelitiimiin. Tiimin jäsenet voivan lisätä uutisia ja muokata sivustolla näkyvää informaatiota. Devaajat voivat katsella pelisessiotietoja ja adminit voivat muokata käyttäjäoikeuksia. Ihmiset voivat jättää viestejä pelintekijöille ja pelintekijät voivat lukea näitä viestejä. Pelin omistavat henkilöt voivat rekisteröidä oman pelinsä sivustolle, mikäli haluavat tutkia pelisessioista kerättyä dataa.</p>
+							<p>Käyn läpi statistiikan keräämiseen liittyviä asioita, sillä ne olivat tämän sovelluksen lähtökohta. Lisäksi näytän kuinka statistiikka esitetään web-sovelluksessa. Asioita tulen näyttämään backendistä, frontendistä, pelistä ja tietokannasta. Lopuksi näytän vielä kuinka uutisen lisääminen tapahtuu sivustolle, sillä siinä on teknisiä asioita, jotka ovat mielenkiintoisia.</p>
 							<p>Tekniikoina on node express backend, angular frontend ja MySQL-tietokanta.</p>
 					</section>
 				</div>
@@ -331,6 +331,56 @@
 							<p>DatabaseControllerissa on tarvittavat muuttujat ja luokka tietueen luomiseksi, sekä lähettämiseksi tietokantaan. SendGameData()-metodilla palautetaan tietue luokan keräämistä sessiotiedoista. Tätä metodia kutsutaan Post()-metodissa, jolla varsinainen tiedon lähettäminen tapahtuu. Metodissa käytetään UnityWebRequestia, tämä ei kuitenkaan ymmärrä JSON:ia, joten se on muutettava tavutaulukoksi, jota tämä ymmärtää. Requestilla käytetään tiedonsiirtometodeita UploadHandlerRaw() (http request body muotoon) ja DownloadHandler() (responsen käsittelyyn),  ja asetetaan headerit joilla tieto lähetetään backendille. SendWebRequest()-metodilla, joka on unityn oma, otetaan yhteyttä backendiin. Tätä Post()-metodia voidaan kutsua pelissä aina tarvittaessa, kun halutaan lähettää pelidataa tietokantaan.</p>
 						</div>
 					</section>
+				</div>
+				<div class="p-3 bg-light">
+					<section>
+						<h5><b>Tietokanta</b></h5>
+					</section>
+				</div>
+				<div class="p-3 bg-light" style="height: 100%">
+					<section>
+							<pre>
+<code class="language-sql">
+CREATE DATABASE IF NOT EXISTS virtualshock;
+USE virtualshock;
+
+DROP TABLE IF EXISTS Data;
+DROP TABLE IF EXISTS Webusers;
+DROP TABLE IF EXISTS Users;
+
+
+CREATE TABLE Users (
+	gameid						VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
+	password					VARCHAR(72) NOT NULL,
+	lastplaydate				DATE
+) ENGINE=INNODB;
+
+CREATE TABLE Webusers (
+) ENGINE=INNODB;
+
+CREATE TABLE Data (
+	id							INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	shotbullets					INT,
+	bulletshitonenemy			INT,
+	meleehits					INT,
+	meleehitsonenemy			INT,
+	deaths						INT,
+	kills						INT,
+	gamefinishtime				INT,
+	secretsfound				INT,
+	damagetaken					INT,
+	damagedealth				INT,
+	distancetravelled			INT,
+	timesgamerspottedbyenemy	INT,
+	playdatetime				DATETIME NOT NULL,
+	gameid						VARCHAR(36) NOT NULL,
+	FOREIGN KEY (gameid) REFERENCES Users (gameid)
+) ENGINE=INNODB;
+</code>
+							</pre>
+							<p>Tietokannan luontilauseet kerättävälle datalle. Kerättävä data on INT muotoista suurimmaksi osaksi ja Data-taulukko on yhteydessä Users-taulukkoon.</p>
+					</section>
+					
 				</div>
 				<div>
 					<div class="p-3 bg-light">
@@ -696,58 +746,221 @@
 								</div>
 							</section>
 						</div>
-				<div>
-					<div class="p-3 bg-light">
-						<section>
-							<h5><b>Tietokanta</b></h5>
-						</section>
-					</div>
-					<div class="p-3 bg-light" style="height: 100%">
-						<section>
-								<pre>
-<code class="language-sql">
-	CREATE DATABASE IF NOT EXISTS virtualshock;
-	USE virtualshock;
+						<div class="p-3 bg-light">
+							<section>
+								<h5><b>Uutisen lisääminen sivustolle</b></h5>
+								<p>Uutista lisättäessä voidaan uutiseen liittää kuva ja youtube-videon linkki. Kuva menee cloudinaryyn bufferina.</p>
+							</section>
+						</div>
+						<div class="p-3 bg-light" style="height: 100%">
+							<section>
+								<a class="prev" onclick="plusSlides5(-1)">&#10094;</a>
+								<a class="next" onclick="plusSlides5(1)">&#10095;</a>
+								<div class="code4" style="height: 100%">
+									<div class="text-right">1/4</div>
+									<pre>
+<code class="language-javascript">
+	exports.createNews = (req, res) => {
+		try {
+			let file = '';
+			// uutisten luonti funktio
+			function news() {
+				const news = new News({
+					title: req.body.title,
+					message: req.body.message,
+					userid: req.body.userid,
+					link: req.body.link,
+					date:  new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+					image: file
+				});
+				News.create(news, (err, data) => {
+					if (err) {
+						res.status(500).send({
+							message: err.message || 'Some error occured while creating the news'
+						});
+					} else {
+						res.send(data);
+					}
+				});
+			}
+			// jos saadaan kuva niin luodaan uutinen sen kanssa
+			if (req.file !== undefined) {
 	
-	DROP TABLE IF EXISTS Data;
-	DROP TABLE IF EXISTS Webusers;
-	DROP TABLE IF EXISTS Users;
-	
-	
-	CREATE TABLE Users (
-		gameid						VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
-		password					VARCHAR(72) NOT NULL,
-		lastplaydate				DATE
-	) ENGINE=INNODB;
-	
-	CREATE TABLE Webusers (
-	) ENGINE=INNODB;
-	
-	CREATE TABLE Data (
-		id							INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-		shotbullets					INT,
-		bulletshitonenemy			INT,
-		meleehits					INT,
-		meleehitsonenemy			INT,
-		deaths						INT,
-		kills						INT,
-		gamefinishtime				INT,
-		secretsfound				INT,
-		damagetaken					INT,
-		damagedealth				INT,
-		distancetravelled			INT,
-		timesgamerspottedbyenemy	INT,
-		playdatetime				DATETIME NOT NULL,
-		gameid						VARCHAR(36) NOT NULL,
-		FOREIGN KEY (gameid) REFERENCES Users (gameid)
-	) ENGINE=INNODB;
+				cloudinaryConfig();
+				cloudinary.uploader.upload_stream((result) => {
+					file = result.url;
+					news();
+				}).end( req.file.buffer );
+			} else {
+				// muuten luodaan ilman kuvaa
+				news();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
 </code>
-								</pre>
-								<p>Tietokannan luontilauseet kerättävälle datalle. Kerättävä data on INT muotoista suurimmaksi osaksi ja Data-taulukko on yhteydessä Users-taulukkoon.</p>
-						</section>
-						
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: controllers/WebDataController.js
+									</p>
+									<p>Uutisen luomisen metodi. Ensin tehdään news()-metodi, jota voidaan kutsua kun halutaan luoda uutinen. Tämä siksi, että voidaan cloudinary-linkki sisällyttää uutiseen kun sellainen saadaan. Mikäli requestin (req.file) mukana saadaan lomake-dataa käsittelevältä middlewarelta kuva, niin käynnistetään lataaminen cloudinaryyn. Kuvadata menee cloudinaryyn bufferina, jonka cloudinary muuntaa sitten kuvaksi. Tätä ennen otetaan cloudinaryn tarvitsemat credentialit configista, että tämä olisi mahdollista. Kun on saatu linkki, luodaan uusi uutinen cloudinaryn kuvalinkin kanssa. Mikäli req.file mukana ei saada kuvaa, luodaan uutinen normaalisti.</p>
+								</div>
+								<div class="code4 slide" style="height: 100%">
+									<div class="text-right">2/4</div>
+									<pre>
+<code class="language-javascript">
+	const authorize = require('../helpers/authorize');
+	const role = require('../models/Role');
+	const multerUploads = require('../middleware/multercloud');
+	// uutisen lisääminen
+	router.post('/newsadd', authorize.authorize([role.Admin, role.Developer]), 
+	multerUploads.multerUploads, webdataController.createNews);
+</code>
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: routes/webusers.js
+									</p>
+									<p>Reitti on suojattu rooleilla, joita ovat Admin ja Developer. Middleware multerUploads pitää huolen siitä, että requestin mukana menee lomake-datana kuva, mikäli sellainen välitetään. createNews on controllereissa oleva metodi, joka edellä esiteltiin.</p>
+									<pre>
+<code class="language-javascript">
+	const multer = require('multer');
+
+	const storage = multer.memoryStorage();
+	const multerUploads = multer({storage}).single('image');
+	
+	module.exports = multerUploads;
+</code>
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: middleware/multercould.js
+									</p>
+									<p>Tämä on melko samanlainen kuin tutoriaalissa, jonka löysin. Käytännössä memoryStorage()-metodi kertoo multerille, että kuva pitää tallentaa muistiin ensin. single(’image’) määrittää minkä niminen on lomakekenttä, josta kuva tulee. Multer myös luo req.file olion.</p>
+								</div>
+								<div class="code4 slide" style="height: 100%">
+									<div class="text-right">3/4</div>
+									<pre>
+<code class="language-ts">
+	newsForm: FormGroup;
+	user = this.auth.getUser();
+  
+	constructor(private fb: FormBuilder, private web: WebdataService, private auth: AuthService, private router: Router) {
+	  this.newsForm = this.fb.group({
+		title: new FormControl('', Validators.required),
+		message: new FormControl('', Validators.required),
+		link: new FormControl(''),
+		image: new FormControl(null)
+	  });
+	}
+  
+	get newsFormControl() {
+	  return this.newsForm.controls;
+	}
+  
+	onFileChanged(event) {
+	  if (event.target.files.length > 0) {
+		const image = event.target.files[0];
+		this.newsForm.get('image').setValue(image);
+	  }
+	}
+  
+	onSubmit() {
+	  const formData = new FormData();
+  
+	  formData.append('title', this.newsForm.get('title').value);
+	  formData.append('message', this.newsForm.get('message').value);
+	  formData.append('userid', this.auth.getUser());
+	  formData.append('link', this.newsForm.get('link').value);
+	  formData.append('image', this.newsForm.get('image').value);
+  
+	  this.web.addNews(formData).subscribe(res => {
+		this.router.navigate(['news']);
+	  });
+	}
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: components/newsadd.component.ts
+									</p>
+									<p>Formbuilderilla luodaan uusi formi ja määritetään sille, että ainakin otsikko ja viesti ovat vaadittuja. Formin controllit palautetaan newsFormControl()-metodilla, nämä ovat validaattoreita varten. onFileChanged()-metodi kuuntelee lisätäänkö lomakkeella kuva, mikäli lisätään, niin kuva laitetaan talteen. onSubmit()-metodissa luodaan uusi formData ja lisätään siihen lomakkeelta saadut tiedot. Tämän jälkeen kutsutaan servicen addNews-metodia, jolla saadaan data lähetettyä backendille.</p>
+								</div>
+								<div class="code4 slide" style="height: 100%">
+									<div class="text-right">4/4</div>
+									<pre>
+<code class="language-html">
+	<textarea>
+	<div class="container">
+		<h1>Add news</h1>
+		<form class="form" [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+	
+			<div class="form-group">
+				<label>Title</label>
+				<input class="form-control" type="text" formControlName="title">
+				<div *ngIf="newsFormControl.title.invalid && (newsFormControl.title.dirty
+				 || newsFormControl.title.touched)">
+					<div class="text-danger" *ngIf="newsFormControl.title.errors.required">
+						Title is required.
 					</div>
+				</div>
 			</div>
+	
+			<div class="form-group">
+				<label>Message</label>
+				<input class="form-control" type="text" formControlName="message">
+				<div *ngIf="newsFormControl.message.invalid && (newsFormControl.message.dirty
+				 || newsFormControl.message.touched)">
+					<div class="text-danger" *ngIf="newsFormControl.message.errors.required">
+						Message is required.
+					</div>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label>Youtube link (short id)</label>
+				<input class="form-control" type="text" formControlName="link">
+			</div>
+	
+			<div class="form-group">
+				<label>Image</label>
+				<input class="form-control" type="file"
+				(change)="onFileChanged($event)"> 
+			</div>
+			
+			<div>
+				<button type="submit" [disabled]="!newsForm.valid">Submit</button>
+			</div>
+		</form>
+	</div>
+	</textarea>
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: components/newsadd.component.html
+									</p>
+									<p>Uutisen lisäämisen formi. Submit painiketta ei näytetä mikäli otsikko tai viesti puuttuu. Kuvatiedoston onFileChanged() on bindattu kuuntelemaan muutoksia siitä, mikäli kenttään valitaan jokin tiedosto.</p>
+							</section>
+						</div>
+						<div class="p-3 bg-light">
+							<section>
+								<h5><b>Roolipohjainen reittien suojaus</b></h5>
+							</section>
+						</div>
+						<div class="p-3 bg-light" style="height: 100%">
+							<section>
+									<pre>
+<code class="language-javascript">
+
+</code>
+									</pre>
+							</section>
+						</div>
+				<div>
+		</div>
 			<div>
 				<div class="p-3 bg-light">
 					<section>
@@ -759,11 +972,17 @@
 				</div>
 				<div class="p-3 bg-light">
 					<section>
+						<h5><b>Projektin oppimistavoitteet</b></h5>
+						<p>Tavoitteena oli oppia lisää websovelluskehityksestä ja työstää ohessa pelimusiikkia, sekä oppia äänien tekemisestä. Opin lisää websovelluskehityksestä todella paljon, sillä tekemistä tässä projektissa riitti ja se tarjosi sisällöltään monipuolisesti opittavaa. Musiikin puolelta ja äänien puolelta löytyi myös tekemistä paljon, työn määrä kasvoi projektin edetessä ja monipuolisesti pääsi tekemään. Oppimistavoitteisiin pääsin mielestäni hyvin, mutta tietenkin paljon on vielä opittavaa tulevaisuutta ajatellen.</p>
+					</section>
+				</div>
+				<div class="p-3 bg-light">
+					<section>
 						<h5><b>Reflektio</b></h5>
 						<p>Aikaisempi kokemus ohjelmoinnista on enimmäkseen koulutöiden parissa. Tämän tyyppiseen fullstack-kehittämiseen kuitenkin minulla on kokemusta vain websovellus-kurssin lopputyön muodossa ja tämä demolabin sovellus oli mitoiltaan huomattavasti suurempi ja tarjosi erilaisia haasteita projektin edetessä.</p>
 						<p>Olen mielestäni kehittynyt websovelluskehityksessä ja en tarvitse enää niin paljon tutoriaalien ja googlen apua kuin aikaisemmin, eli kehitystä on tapahtunut. Tietysti uusien asioiden vastaan tullessa turvaudun etsimään tietoa googlen avulla. Osaan myös etsiä tietoa tehokkaammin, sillä sitä tuli tehtyä paljon tämän projektin parissa.</p>
 						<p>Tunnistan myös oppimisen tarpeita omissa sovelluskehitystaidoissa. Seuraavia asioita voisin listata, joihin pitää perehtyä tarkemmin: asyncroninen ohjelmointi, virheiden käsittely ja .net/asp.net-sovelluksien kehittäminen. Viimeisenä mainittuja olen kuullut työelämässä käytettävän, joten niiden opiskelu on hyödyllistä.</p>
-						<p>Tulevaisuudessa haluaisin työskennellä websovelluskehityksen parissa ja aionkin kehittää taitojani lisää.</p>
+						<p>Tulevaisuudessa haluaisin työskennellä websovelluskehityksen parissa.</p>
 					</section>
 				</div>
 			</div>
