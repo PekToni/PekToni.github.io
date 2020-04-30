@@ -948,13 +948,59 @@ CREATE TABLE Data (
 						<div class="p-3 bg-light">
 							<section>
 								<h5><b>Roolipohjainen reittien suojaus</b></h5>
+								<p>Tutoriaalia hyödynnetty kun tehtiin tätä reittien suojausta. Reittien suojaus tapahtui authorize metodilla, jolle välitetään taulukko rooleista. Returnissa katsotaan vastaako rooli tokenissa olevaa roolia. Jos tokenia ei saada, hylätään pääsy. Jos token saadaan, niin se puretaan ja katsotaan onko rooli sama kuin metodiin annetuissa rooleissa. Jos ei, niin hylätään pääsy ja mikäli roolille löytyy vastaavuus, niin päästetään eteenpäin.</p>
 							</section>
 						</div>
 						<div class="p-3 bg-light" style="height: 100%">
 							<section>
 									<pre>
 <code class="language-javascript">
+	const jwt = require('jsonwebtoken');
 
+	exports.authorize = (roles = []) => {
+		if (typeof roles === 'string') {
+			roles = [roles];
+		}
+	
+		return [
+			
+			(req, res, next) => {
+	
+				// otetaan token vastaan headereista
+				const token = req.headers['authorization'];
+	
+				// jos ei tokenia niin ei päästetä läpi
+				if (!token) {
+					return res.status(401).json({
+						auth: false,
+						message: 'Did not deliver token'
+					});
+				}
+	
+				// verifoidaan token
+				jwt.verify(token, process.env.SECRET, (err, decoded) => {
+					// jos error, niin palautetaan sellainen
+					if (err) {
+						console.log(err);
+						return res.status(401).json({
+							auth: false,
+							error: err,
+							message: 'Error in authorization'
+						});
+					}
+					// tarkastetaan onko roolia, jos ei niin ei päästetä läpi
+					if (roles.length && !roles.includes(decoded.role)) {
+						return res.status(401).json({
+							auth: false,
+							message: 'Unauthorized'
+						});
+					}
+					// mennään eteen päin jos kaikki kunnossa
+					next();
+				});
+			}
+		];
+	}
 </code>
 									</pre>
 							</section>
