@@ -85,7 +85,7 @@
 				<div class="p-3 bg-light">
 					<section>
 						<h5><b>Statistiikkatiedon tallentaminen pelistä</b></h5>
-						<p>Tässä esitellään ratkaisu siitä, kuinka tietoa kerätään pelistä ja mitä siihen tarvitaan backendin ja pelin puolelta.</p>
+						<p>Tässä esitellään ratkaisu siitä, kuinka tietoa kerätään pelistä ja mitä siihen tarvitaan backendin ja pelin puolelta. Tavoitteena on saada kerättyä pelisessioista statistiikkaa pelin puolelta. Haasteena tässä oli tietysti implementointi unityn puolella, kuinka data saadaan välitettyä backendiin ja unityn yhteen toimivuus. Ratkaisuna käytetään id tunnistusta pelille ja unityn omaa unitywebrequest oliota, jonka kanssa jouduttiin hieman säätämään, että saadaan JSON-dataa lähetettyä eteenpäin. Tässä tuli opittua hyvin pelin implemennoinnista node.js backendiin ja kerrattua C#-ohjelmointia.</p>
 					</section>
 				</div>
 				<div class="p-3 bg-light" style="height: 100%">
@@ -386,7 +386,7 @@ CREATE TABLE Data (
 					<div class="p-3 bg-light">
 						<section>
 							<h5><b>Statistiikan näyttäminen web-sovelluksessa</b></h5>
-							<p>Valitsin tähän portfolioon datan näyttämisestä osan jossa näkyy viimeiset 7 päivää. Tämä siksi, että siinä käytetään graafista line charttia tiedon näyttämiseen. Näytän myös lyhyesti, kuinka yleinen statistiikka näytetään.</p>
+							<p>Valitsin tähän portfolioon datan näyttämisestä osan jossa näkyy viimeiset 7 päivää. Tämä siksi, että siinä käytetään graafista line charttia tiedon näyttämiseen. Näytän myös lyhyesti, kuinka yleinen statistiikka näytetään. Tarkoituksena siis näyttää viimeiset 7 päivää line charttina. Suurin haaste tässä olivat päivät jolloin pelaajia ei ole ollut ollenkaan, sillä sellaisille päiville ei pelidataa tallennus ja näin ollen realistiset 7 edellistä päivää eivät olisi näkyvillä. Ratkaisuna oli luoda tietue, johon nämäkin päivät ilmaantuvat 0-pelaaja määrillä ja tämän välittäminen frontendiin. Lisäksi charttien käytön opiskelu frontendin puolella oli tehtävä, ja nämä saatiinkin kätevästi plugareilla joita angulariin saa. Näin ollen kaikki 7 edellistä päivää näkyy graafissa vaikka pelaajia ei olisi ollutkaan. Tässä tuli opittua ettei tietokannasta tiedon kaivaminen näytettäväksi ole aina niin yksinkertaista.</p>
 						</section>
 					</div>
 					<div class="p-3 bg-light" style="height: 100%">
@@ -576,6 +576,7 @@ CREATE TABLE Data (
 						<div class="p-3 bg-light">
 							<section>
 								<h5><b>Yleinen statistiikka</b></h5>
+								<p>Sovelluksessa näytetään myös yleistä statistiikkaa numeromuodossa. Tavoitteena näyttää summia ja keskimääräisiä arvoja. Tietokantakyselyillä saatiin näppärästi eri arvot palautettua backendistä, joten näiden kanssa ei hirveämmin haasteita ollut. Suurimmat haasteet tässä kenties desimaalien ja eri arvojen näyttö oikeassa muodossa. Nämä kuitenkin ratkottiin angularin puolella pipellä ja metodeilla. Tuli kerrattua tietokantakyselyitä tässäkin.</p>
 							</section>
 						</div>
 						<div class="p-3 bg-light" style="height: 100%">
@@ -749,7 +750,7 @@ CREATE TABLE Data (
 						<div class="p-3 bg-light">
 							<section>
 								<h5><b>Uutisen lisääminen sivustolle</b></h5>
-								<p>Uutista lisättäessä voidaan uutiseen liittää kuva ja youtube-videon linkki. Kuva menee cloudinaryyn bufferina.</p>
+								<p>Tavoitteena, että devaajat ja adminit voivat lisätä uutisia sivustolle, sekä uutista lisättäessä voidaan uutiseen liittää kuva ja youtube-videon linkki. Kuva menee cloudinaryyn ja youtube-video upotetaan sivustolle. Haasteena oli kuvatiedoston saaminen uutiseen, sillä tätä ei herokun backendiin voida tallentaa. Ratkaisuna oli käyttää cloudinaryn pilvipalvelua kuvan tallentamiseen ja multeria backendissä auttamaan välimuistin hyödyntämisessä väliaikaiseksi varastopaikaksi kun kuva välitetään frontendistä. Kuva menee bufferina cloudinaryyn, joka muuntaa sen takaisin alkuperäiseen muotoonsa. Tässä tuli opittua backendin toiminnasta tiedostojen siirtoon ja erillisen tiedostopalvelun liittämisestä sovellukseen. Lisäksi reaktiivisten lomakkeiden käyttö angularissa tuli tutuksi.</p>
 							</section>
 						</div>
 						<div class="p-3 bg-light" style="height: 100%">
@@ -948,7 +949,8 @@ CREATE TABLE Data (
 						<div class="p-3 bg-light">
 							<section>
 								<h5><b>Roolipohjainen reittien suojaus</b></h5>
-								<p>Tutoriaalia hyödynnetty kun tehtiin tätä reittien suojausta. Reittien suojaus tapahtui authorize metodilla, jolle välitetään taulukko rooleista. Returnissa katsotaan vastaako rooli tokenissa olevaa roolia. Jos tokenia ei saada, hylätään pääsy. Jos token saadaan, niin se puretaan ja katsotaan onko rooli sama kuin metodiin annetuissa rooleissa. Jos ei, niin hylätään pääsy ja mikäli roolille löytyy vastaavuus, niin päästetään eteenpäin.</p>
+								<p>Tavoitteena saada reitit suojattua käyttäjän roolien perusteella. Tutoriaalia hyödynnetty kun tehtiin tätä reittien suojausta. Ongelmana oli saada ratkaisusta sellainen, että montaa eri metodia ei tarvittaisi ja vähäisellä koodauksella, mutta roolipohjainen suojaus reitille saataisiin tehtyä. Ratkaisuna oli, että välitetään roolit reitillä olevalle metodille, tämä oli aika yksinkertainen, mutta nokkela ratkaisu (saman tyylistä ratkaisua käytetään myös frondendin puolella guardin kanssa). Näitä reitillä välitettyjä rooleja vertaillaan käyttäjän tokenissa olevaan rooliin ja tämän perusteella myönnetään tai evätään pääsy reitille. Tässä tuli opittua juurikin roolipohjaisesta reittien suojauksesta.</p>
+								<p>Reittien suojaus tapahtui authorize metodilla, jolle välitetään taulukko rooleista. Returnissa katsotaan vastaako rooli tokenissa olevaa roolia. Jos tokenia ei saada, hylätään pääsy. Jos token saadaan, niin se puretaan ja katsotaan onko rooli sama kuin metodiin annetuissa rooleissa. Jos ei, niin hylätään pääsy ja mikäli roolille löytyy vastaavuus, niin päästetään eteenpäin.</p>
 							</section>
 						</div>
 						<div class="p-3 bg-light" style="height: 100%">
@@ -1014,6 +1016,89 @@ CREATE TABLE Data (
 						<p>Tein projektissa sivutyönä musiikkia ja ääniä peliin. Näitä töitä tein yhteensä 5 viikkoa opintojaksosta ja sainkin aikaan varsin paljon kyseisissä töissä aikaan nähden. Olen myös tyytyväinen musiikkiin, jota sain tehdä peliin. Äänien tekeminen oli mielenkiintoinen kokemus ja siinä sai käyttää mielikuvitusta paljon, kun mietiskeli kuinka äänen tekisi aina mihinkin tilanteeseen. Monsterin äänien työstäminen oli ehkä haastavinta ja siinä joutui layeroimaan ääniä paljon. Juuri äänien tekemisestä opinkin tässä sivutyössä eniten.</p>
 						<p>Musiikin tekemisestä opin ambientin tekemistä ja drum&bass tyylisen musiikin tekemistä. Musiikin tekeminenkin voi olla haastavaa jos oikeat instrumentit puuttuvat. Minulla kuitenkin oli puitteet kohdallaan näiltä osin ja sain tehtyä tarvittavan tyylistä musiikkia. Perehtyminen uusiin genreihin ja niiden opiskelu on aikaa vievää, mutta yleensä niiden tekeminen rupeaa sujumaan kun perehtyy tarpeeksi tyylilajien ominaisuuksiin.</p>
 						<p>Kaiken kaikkiaan äänityöskentely projektin parissa oli varsin mukavaa.</p>
+						<p>Seuraavaksi muutamia näytteitä, joissa musiikista miltei kaikki, mutta äänistä vai muutama.</p>
+					</section>
+					<section>
+						<p><b>Näytteet kappaleista</b></p>
+						<div class="row">
+							<div class="col-sm">
+								<p>Ambient 1:</p>
+								<audio controls>
+									<source src="audio/ambient1.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Ambient 2:</p>
+								<audio controls>
+									<source src="audio/ambient2.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Fx music 1:</p>
+								<audio controls>
+									<source src="audio/fx_music1.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<p>Fx music 2:</p>
+								<audio controls>
+									<source src="audio/fx_music2.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Fx music 3:</p>
+								<audio controls>
+									<source src="audio/fx_music3.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Techno 1:</p>
+								<audio controls>
+									<source src="audio/tekno1.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<p>Techno 2:</p>
+								<audio controls>
+									<source src="audio/tekno2final.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+					</section>
+					<section class="pt-3">
+						<p><b>Näytteet äänistä</b></p>
+						<div class="row">
+							<div class="col-sm">
+								<p>Big door: </p>
+								<audio controls>
+									<source src="audio/bigdoor.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Small door: </p>
+								<audio controls>
+									<source src="audio/smalldoor.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Monster war: </p>
+								<audio controls>
+									<source src="audio/monsterwar.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<p>Monster death: </p>
+								<audio controls>
+									<source src="audio/monsterdeath.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
 					</section>
 				</div>
 				<div class="p-3 bg-light">
@@ -1025,9 +1110,11 @@ CREATE TABLE Data (
 				<div class="p-3 bg-light">
 					<section>
 						<h5><b>Reflektio</b></h5>
-						<p>Aikaisempi kokemus ohjelmoinnista on enimmäkseen koulutöiden parissa. Tämän tyyppiseen fullstack-kehittämiseen kuitenkin minulla on kokemusta vain websovellus-kurssin lopputyön muodossa ja tämä demolabin sovellus oli mitoiltaan huomattavasti suurempi ja tarjosi erilaisia haasteita projektin edetessä.</p>
-						<p>Olen mielestäni kehittynyt websovelluskehityksessä ja en tarvitse enää niin paljon tutoriaalien ja googlen apua kuin aikaisemmin, eli kehitystä on tapahtunut. Tietysti uusien asioiden vastaan tullessa turvaudun etsimään tietoa googlen avulla. Osaan myös etsiä tietoa tehokkaammin, sillä sitä tuli tehtyä paljon tämän projektin parissa.</p>
-						<p>Tunnistan myös oppimisen tarpeita omissa sovelluskehitystaidoissa. Seuraavia asioita voisin listata, joihin pitää perehtyä tarkemmin: asyncroninen ohjelmointi, virheiden käsittely ja .net/asp.net-sovelluksien kehittäminen. Viimeisenä mainittuja olen kuullut työelämässä käytettävän, joten niiden opiskelu on hyödyllistä.</p>
+						<p>Aikaisempi kokemus ohjelmoinnista on enimmäkseen koulutöiden parissa. Tämän tyyppiseen fullstack-kehittämiseen kuitenkin minulla on kokemusta vain websovellus-kurssin lopputyön muodossa ja tämä demolabin sovellus oli mitoiltaan huomattavasti suurempi ja tarjosi erilaisia haasteita projektin edetessä. Lisäksi jonkin verran työtä, joka toistui eri osissa sovellusta, joten jonkinlainen rutiini tuli tekemiseen ja aina ei ollut aikaa opiskella hienompaa tyyliä tehdä asioita koodissa, koska työn määrä oli melkoisen suuri. Ongelmien vastaan tullessa ratkaisun löytäminen vei yleensä tunteja aikaa ja toisinaan saattoi olla, että löysin vain yhden ratkaisun, joka toimi kyseisessä tilanteessa. Sain kuitenkin ongelmat ratkaistua ja olen siihen tyytyväinen.</p>
+						<p>Tässä portfoliossa esitellyt asiat ovat vain osa siitä mitä tein sovellukseen, mutta niissä on mielestäni hyviä asioita, joista näkee ratkaisuja, mitä olen tehnyt. Kuitenkin muitakin hienoja asioita opin kuten roolipohjaisen reittien suojauksen angularin puolella, formin upottamisen taulukkoon, jonkin verran promiseiden kanssa työskentelystä, modalien käytön, resolverin käytön, jolla saadaan ladattua sivun sisältö ennen kuin varsinainen komponentti avataan ja niin edelleen. MySQL käyttö noden kanssa ei ollut kovinkaan tuttua, joten sen kanssa työskentely oli myös uutta ja siihen liittyvien käytänteiden opiskelu.</p>
+						<p>Olen mielestäni kehittynyt websovelluskehityksessä ja en tarvitse enää niin paljon tutoriaalien ja googlen apua kuin aikaisemmin, eli kehitystä on tapahtunut. Minulla on parempi kuva sovelluksien rakenteista ja ratkaisuista, kuinka asiat voi hoitaa. Tutkin kuitenkin mieluusti asioita ennen kuin käyn tekemään toteutusta joten, tietysti uusien asioiden vastaan tullessa turvaudun etsimään tietoa googlen avulla. Osaan myös etsiä tietoa tehokkaammin, sillä sitä tuli tehtyä paljon tämän projektin parissa.</p>
+						<p>Tunnistan myös oppimisen tarpeita omissa sovelluskehitystaidoissa. Seuraavia asioita voisin listata, joihin pitää perehtyä tarkemmin: asyncroninen ohjelmointi, virheiden käsittely, paremmat ohjelmointi käytänteet, sillä välillä koodia tuli toistettua ja varmasti ylimääräisiä rivejä syntyi. Angularin puolella custom pipet ja interceptorit paremmin haltuun. .net/asp.net-sovelluksien kehittäminen. Viimeisenä mainittuja olen kuullut työelämässä käytettävän, joten niiden opiskelu on hyödyllistä.</p>
+						<p>Huomasin työskennellessäni, että 5-6 tuntia pystyn tekemään ohjelmoinnin kaltaista työstentelyä, tämän jälkeen alkaa työteho laskemaan, vaikka töitä pystyykin jatkamaan.</p>
 						<p>Tulevaisuudessa haluaisin työskennellä websovelluskehityksen parissa.</p>
 					</section>
 				</div>
