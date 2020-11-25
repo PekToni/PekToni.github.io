@@ -1,0 +1,11 @@
+body {
+    background-color: grey;
+}
+.navigation {
+    width: 100%;
+}
+.main {
+    background-color: black;
+    color: white;
+    height: 100%;
+}

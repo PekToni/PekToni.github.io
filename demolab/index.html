@@ -1,0 +1,1147 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Toni Pekurinen">
+	<meta name="description" content="Portfolio">
+	<meta name="keywords" content="Webdevelopment">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Portfolio</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="styles/style.css">
+	<link href="styles/prism.css" rel="stylesheet">
+</head>
+	<body>
+		<!-- container section starts -->
+		<div class="container bg-dark pt-3 border border-secondary">
+			<!-- header section -->
+            <div class="text-center bg-light p-2 border border-secondary">
+                <h2 class="text-secondary">Tervetuloa portfoliooni</h2>
+            </div>
+			<!-- navigation menu section -->
+			<div>
+			<nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 border border-secondary">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+                        <a class="nav-link text-primary" href="index.html">Portfolio</a>
+                    </li>
+				</ul>
+			</nav>
+			<!-- site content section -->
+			<div>
+                <div class="bg-light p-3">
+                    <h2 class="text-secondary">Virtual Shock-pelin statistiikka- ja websovellus</h2>
+                </div>
+                <div class="px-3 bg-light">
+                    <div><img class="img-fluid" src="images/virtualshock.jpg" /></div>
+                </div>
+				<div class="p-3 bg-light">
+					<section class="pt-2">
+                        <h5><b>Projektin aikana opin</b></h5>
+							<p><b>Node.js/express ympäristössä seuraavia asioita:</b></p>
+							<p>Virheenkäsittely, MySQL tietokantojen käyttäminen, autentikaatio ja roolipohjainen reittien suojaus, ympäristömuuttujien käyttäminen, kuvatiedostojen siirto pilvipalvelimelle, CRUD metodien luominen.</p>
+							<p></p>
+							<p><b>Angular ympäristössä:</b></p>
+							<p>Autentikaatio ja roolipohjainen reittien suojaus, resolverin käyttö reitille, reaktiiviset lomakkeet ja validointi, bootstrap, graafien käyttö tiedon esittämiseen, youtube-videoiden esittäminen sivulla, angularin perusteet paremmin haltuun.</p>
+							<p></p>
+							<p><b>Unity ympäristössä:</b></p>
+							<p>Tiedon välittäminen JSON-muodossa.</p>
+							<p></p>
+							<p><b>Tietokannat:</b></p>
+							<p>MySQL tietokannan käyttö amazon webservices kanssa.</p>
+							<p></p>
+							<p><b>Muuta:</b></p>
+							<p>Ympäristömuuttujat, cloudinary, git.</p>
+					</section>
+                    <section class="pt-2">
+                        <h5><b>Alkusanat</b></h5>
+							<p>Olin mukana peliprojektissa jossa luotiin virtual reality -laitteistolle kauhupeliä nimeltä Virtual Shock. Tiimin nimi on Team TBD. Tehtäväni oli tehdä toteutus peliin, jolla kerätään tietokantaan pelidataa pelisessioista. Tätä pelidataa voidaan näyttää pelaajille web-sovelluksessa, joka toimii myös pelin sivustona. Sivustolla on myös sisällönhallinnallisia ominaisuuksia. Sivustolla voi myös lukea uutisia, tietoa pelistä, tiimistä ja ottaa yhteyttä pelitiimiin. Tiimin jäsenet voivan lisätä uutisia ja muokata sivustolla näkyvää informaatiota. Devaajat voivat katsella pelisessiotietoja ja adminit voivat muokata käyttäjäoikeuksia. Ihmiset voivat jättää viestejä pelintekijöille ja pelintekijät voivat lukea näitä viestejä. Pelin omistavat henkilöt voivat rekisteröidä oman pelinsä sivustolle, mikäli haluavat tutkia pelisessioista kerättyä dataa.</p>
+							<p>Käyn läpi statistiikan keräämiseen liittyviä asioita, sillä ne olivat tämän sovelluksen lähtökohta. Lisäksi näytän kuinka statistiikka esitetään web-sovelluksessa. Asioita tulen näyttämään backendistä, frontendistä, pelistä ja tietokannasta. Näytän myös kuinka uutisen lisääminen tapahtuu sivustolle, sillä siinä on teknisiä asioita, jotka ovat mielenkiintoisia. Ihan viimeksi esittelen reittien roolipohjaisen suojauksen.</p>
+							<p>Tekniikoina on node express backend, angular frontend ja MySQL-tietokanta.</p>
+					</section>
+				</div>
+				<div class="p-3 bg-light" style="height: 600px">
+					<section>
+						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+						<a class="next" onclick="plusSlides(1)">&#10095;</a>
+						<div class="slides">
+							<div class="text-right">1/3</div>
+							<img src="./images/stats_7_days.JPG" style="width:100%">
+						</div>
+					
+						<div class="slides">
+							<div class="text-right">2/3</div>
+							<img src="./images/stats_overall.JPG" style="width:100%">
+						</div>
+					
+						<div class="slides">
+							<div class="text-right">3/3</div>
+							<img src="./images/stats_accuracy.JPG" style="width:100%">
+						</div>
+					</section>
+				</div>
+			</div>
+			<div>
+				<div class="p-3 bg-light">
+					<section>
+						<h5><b>Statistiikkatiedon tallentaminen pelistä</b></h5>
+						<p>Tässä esitellään ratkaisu siitä, kuinka tietoa kerätään pelistä ja mitä siihen tarvitaan backendin ja pelin puolelta. Tavoitteena on saada kerättyä pelisessioista statistiikkaa pelin puolelta. Haasteena tässä oli tietysti implementointi unityn puolella, kuinka data saadaan välitettyä backendiin ja unityn yhteen toimivuus. Ratkaisuna käytetään id tunnistusta pelille ja unityn omaa unitywebrequest oliota, jonka kanssa jouduttiin hieman säätämään, että saadaan JSON-dataa lähetettyä eteenpäin. Tässä tuli opittua hyvin pelin implemennoinnista node.js backendiin ja kerrattua C#-ohjelmointia.</p>
+					</section>
+				</div>
+				<div class="p-3 bg-light" style="height: 100%">
+					<section>
+						<a class="prev" onclick="plusSlides2(-1)">&#10094;</a>
+						<a class="next" onclick="plusSlides2(1)">&#10095;</a>
+						<div class="code1" style="height: 100%">
+							<div class="text-right">1/5</div>
+							<pre>
+<code class="language-javascript">
+	// konstruktori
+	const Data = function(data) {
+		this.shotbullets = data.shotbullets,
+		this.bulletshitonenemy = data.bulletshitonenemy,
+		this.meleehits = data. meleehits,
+		this.meleehitsonenemy = data.meleehitsonenemy,
+		this.deaths = data.deaths,
+		this.kills = data.kills,
+		this.gamefinishtime = data.gamefinishtime,
+		this.secretsfound = data.secretsfound,
+		this.damagetaken = data.damagetaken,
+		this.damagedealth = data.damagedealth,
+		this.distancetravelled = data.distancetravelled,
+		this.timesgamerspottedbyenemy = data.timesgamerspottedbyenemy,
+		this.playdatetime = data.playdatetime,
+		this.gameid = data.gameid
+	}
+	
+	// luodaan uusi pelaajadata
+	Data.create = (data, result) => {
+		sql.query(`INSERT INTO Data SET ?`, data, (err, res) => {
+	
+			// jos errori, niin annetaan sellainen
+			if (err) {
+				console.log(err);
+				result(err, null);
+				return;
+			}
+	
+			// palautetaan luotu data vastauksena
+			result(null, { ...data });
+		});
+	}
+</code>
+							</pre>
+							<p>
+								Backend, 
+								tiedoston sijainti: models/Data.js
+							</p>
+							<p>Modelin puolella määritetään konstruktorissa tietokantaan menevä data. Create metodissa suoritetaan tietokantaan datan syöttäminen ja käsitellään mahdolliset virheet. Result on backendin controllerin puolella oleva callback-funktio ja data on tietue, joka tulee controllerista tähän metodiin.</p>
+						</div>
+					
+						<div class="code1 slide">
+							<div class="text-right">2/5</div>
+							<pre>
+<code class="language-javascript">
+	// etsitään käyttäjän peli id perusteella
+	User.FindById = (gameId, result) => {
+		sql.query(`SELECT * FROM Users WHERE gameid = ?`, gameId, (err, res) => {
+			if (err) {
+				console.log('error: ', err);
+				result(err, null);
+				return;
+			}
+
+			// ei löydy käyttäjää
+			if (res[0] === null) {
+				result({kind: 'not_found'}, null);
+				return;
+			}
+	
+			// löydettiin käyttäjä
+			if (res.length) {
+			console.log('found game: ', res[0]);
+			result(null, res[0]);
+			return;
+			}
+		});
+	}
+</code>
+							</pre>
+							<p>
+								Backend, 
+								tiedoston sijainti: models/User.js
+							</p>
+							<p>Tämä metodi on käyttäjän pelin etsimistä varten tietokannasta, myöskin omassa modelissaan. Käytännössä käyttäjän peliä etsitään tietokannasta pelin id:n perusteella, joka on luotu pelin puolella ja tallennettu tietokantaan. Ensin virheenkäsittelyt, lisänä err.kind virhe jos tietokannasta ei löydy dataa. Kun peli löytyy niin palautetaan data.</p>
+						</div>
+						<div class="code1 slide">
+							<div class="text-right">3/5</div>
+							<pre>
+<code class="language-javascript">
+	// luodaan pelaajalle uusi data tietokantaan
+	exports.create = (req, res) => {
+		// etsitään käyttäjä
+		User.FindById(req.params.gameId, (err, user) => {
+			if (err) {
+				// jos käyttäjää ei löydy
+				if (err.kind === 'not_found') {
+					return res.status(404).send({
+							message: `Not found user with id: ${req.params.gameId}.`
+					});
+				} else {
+					return res.status(500).send({
+							message: `Error retvieving user with id: ${req.params.gameId}`
+					});
+				}
+			} else {
+	
+				// luodaan uusi data-olio, haetaan bodysta pelitiedot ja käyttäjähaun tuloksesta id
+				const data = new Data({
+					shotbullets: req.body.shotbullets,
+					bulletshitonenemy: req.body.bulletshitonenemy,
+					meleehits: req.body.meleehits,
+					meleehitsonenemy: req.body.meleehitsonenemy,
+					deaths: req.body.deaths,
+					kills: req.body.kills,
+					gamefinishtime: req.body.gamefinishtime,
+					secretsfound: req.body.secretsfound,
+					damagetaken: req.body.damagetaken,
+					damagedealth: req.body.damagedealth,
+					distancetravelled: req.body.distancetravelled,
+					timesgamerspottedbyenemy: req.body.timesgamerspottedbyenemy,
+					playdatetime: new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+					gameid: user.gameid
+				});
+				
+				// luodaan ja lähetetään data
+				Data.create(data, (err, data) => {
+					if (err) {
+						res.status(500).send({
+							message: err.message || 'Some error occured while creating the data'
+						});
+					} else {
+						res.send(data);
+					}
+				});
+			}
+		});
+	}
+</code>
+							</pre>
+							<p>
+								Backend, 
+								tiedoston sijainti: controllers/DataController.js
+							</p>
+							<p>Pelidatan luontimetodi controllerin puolella. Kutsutaan modeleiden puolella olevia metodeita User.js- ja Data.js-modeleista. Ensin etsitään käyttäjän peli ja palautetaan mahdolliset virheet, joko peliä ei löytynyt ja palvelinvirheet. Luodaan uusi tietue, jossa pelisession tiedot ja lähetetään modelin metodille kyseiset tiedot, jossa varsinainen tietokantakäsittely suoritetaan aikaisemmin esitetyllä tavalla. Palautetaan vastauksena joko mahdollinen virhe, tai tietue joka luotiin.</p>
+						</div>
+						<div class="code1 slide">
+							<div class="text-right">4/5</div>
+							<pre>
+<code class="language-javascript">
+	// Luodaan uusi datakokonaisuus pelaajalle
+	router.post('/:gameId', auth, dataController.create);
+</code>
+							</pre>
+							<p>
+								Backend, 
+								tiedoston sijainti: routes/data.js.js
+							</p>
+							<p>Reitti jota käytetään tietueen lisäämiseen, reitti määrittyy pelin id:n perusteella, joka lisätään reitin osoitteeseen. Auth sisältää metodin jolla tarkistetaan onko pelistä saatu token oikea ja voimassa oleva. Tässä kutsutaan controllerissa olevaa create-metodia.</p>
+						</div>
+						<div class="code1 slide">
+							<div class="text-right">5/5</div>
+							<pre>
+<code class="language-cs">
+	// kerättävän sessiodatan muuttujat
+    public int shotBullets = 0;
+    public int bulletsHitOnEnemy = 0;
+    public int meleeHits = 0;
+    public int meleeHitsOnEnemy = 0;
+    public int deaths = 0;
+    public int kills = 0;
+    public int gameFinishTime = 0;
+    public int secretsFound = 0;
+    public int damageTaken = 0;
+    public int damageGiven = 0;
+    public int distanceTraveled = 0;
+    public int timesGamerSpottedByEnemy = 0;
+	// käyttäjätiedot kirjautumiseen ja datan lähettämiseen
+    public string gameid = "";
+
+	// kerätään olioon pelisession data
+    public DatabaseItem SendGameData()
+    {
+        return new DatabaseItem(shotBullets, bulletsHitOnEnemy, meleeHits, meleeHitsOnEnemy, deaths, kills,
+            gameFinishTime, secretsFound, damageTaken, damageGiven, distanceTraveled, timesGamerSpottedByEnemy);
+    }
+	// postataan tietokantaan json oliona pelisession data
+    public IEnumerator Post()
+    {
+        string gameid = this.gameid;
+        var data = SendGameData();
+        var jsonString = JsonUtility.ToJson(data);
+        var request = new UnityWebRequest(dataUrl + gameid, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-type", "application/json");
+        request.SetRequestHeader("authorization", token);
+        Debug.Log("Status Code: " + request.responseCode);
+        yield return request.SendWebRequest();
+    }
+	// Tietokantaan lähetettävän olion luokka
+	public class DatabaseItem
+    {
+        // kerättävän sessiodatan muuttujat
+        public int shotbullets = 0;
+        public int bulletshitonenemy = 0;
+        public int meleehits = 0;
+        public int meleehitsonenemy = 0;
+        public int deaths = 0;
+        public int kills = 0;
+        public int gamefinishtime = 0;
+        public int secretsfound = 0;
+        public int damagetaken = 0;
+        public int damagedealth = 0;
+        public int distancetravelled = 0;
+        public int timesgamerspottedbyenemy = 0;
+
+		public DatabaseItem (int shot, int bHitsE, int melee, int mHitsE, int d, int k, int gameFt, 
+			int sFound, int dTaken, int dGiven, int distT, int timesGsbE)
+        {
+            shotbullets = shot;
+            bulletshitonenemy = bHitsE;
+            meleehits = melee;
+            meleehitsonenemy = mHitsE;
+            deaths = d;
+            kills = k;
+            gamefinishtime = gameFt;
+            secretsfound = sFound;
+            damagetaken = dTaken;
+            damagedealth = dGiven;
+            distancetravelled = distT;
+            timesgamerspottedbyenemy = timesGsbE;
+        }
+    }
+</code>
+							</pre>
+							<p>
+								Peli, 
+								tiedosto: DatabaseController.cs
+							</p>
+							<p>DatabaseControllerissa on tarvittavat muuttujat ja luokka tietueen luomiseksi, sekä lähettämiseksi tietokantaan. SendGameData()-metodilla palautetaan tietue luokan keräämistä sessiotiedoista. Tätä metodia kutsutaan Post()-metodissa, jolla varsinainen tiedon lähettäminen tapahtuu. Metodissa käytetään UnityWebRequestia, tämä ei kuitenkaan ymmärrä JSON:ia, joten se on muutettava tavutaulukoksi, jota tämä ymmärtää. Requestilla käytetään tiedonsiirtometodeita UploadHandlerRaw() (http request body muotoon) ja DownloadHandler() (responsen käsittelyyn),  ja asetetaan headerit joilla tieto lähetetään backendille. SendWebRequest()-metodilla, joka on unityn oma, otetaan yhteyttä backendiin. Tätä Post()-metodia voidaan kutsua pelissä aina tarvittaessa, kun halutaan lähettää pelidataa tietokantaan.</p>
+						</div>
+					</section>
+				</div>
+				<div class="p-3 bg-light">
+					<section>
+						<h5><b>Tietokanta</b></h5>
+					</section>
+				</div>
+				<div class="p-3 bg-light" style="height: 100%">
+					<section>
+							<pre>
+<code class="language-sql">
+CREATE DATABASE IF NOT EXISTS virtualshock;
+USE virtualshock;
+
+DROP TABLE IF EXISTS Data;
+DROP TABLE IF EXISTS Webusers;
+DROP TABLE IF EXISTS Users;
+
+
+CREATE TABLE Users (
+	gameid						VARCHAR(36) PRIMARY KEY NOT NULL UNIQUE,
+	password					VARCHAR(72) NOT NULL,
+	lastplaydate				DATE
+) ENGINE=INNODB;
+
+CREATE TABLE Webusers (
+) ENGINE=INNODB;
+
+CREATE TABLE Data (
+	id							INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	shotbullets					INT,
+	bulletshitonenemy			INT,
+	meleehits					INT,
+	meleehitsonenemy			INT,
+	deaths						INT,
+	kills						INT,
+	gamefinishtime				INT,
+	secretsfound				INT,
+	damagetaken					INT,
+	damagedealth				INT,
+	distancetravelled			INT,
+	timesgamerspottedbyenemy	INT,
+	playdatetime				DATETIME NOT NULL,
+	gameid						VARCHAR(36) NOT NULL,
+	FOREIGN KEY (gameid) REFERENCES Users (gameid)
+) ENGINE=INNODB;
+</code>
+							</pre>
+							<p>Tietokannan luontilauseet kerättävälle datalle. Kerättävä data on INT muotoista suurimmaksi osaksi ja Data-taulukko on yhteydessä Users-taulukkoon.</p>
+					</section>
+					
+				</div>
+				<div>
+					<div class="p-3 bg-light">
+						<section>
+							<h5><b>Statistiikan näyttäminen web-sovelluksessa</b></h5>
+							<p>Valitsin tähän portfolioon datan näyttämisestä osan jossa näkyy viimeiset 7 päivää. Tämä siksi, että siinä käytetään graafista line charttia tiedon näyttämiseen. Näytän myös lyhyesti, kuinka yleinen statistiikka näytetään. Tarkoituksena siis näyttää viimeiset 7 päivää line charttina. Suurin haaste tässä olivat päivät jolloin pelaajia ei ole ollut ollenkaan, sillä sellaisille päiville ei pelidataa tallennus ja näin ollen realistiset 7 edellistä päivää eivät olisi näkyvillä. Ratkaisuna oli luoda tietue, johon nämäkin päivät ilmaantuvat 0-pelaaja määrillä ja tämän välittäminen frontendiin. Lisäksi charttien käytön opiskelu frontendin puolella oli tehtävä, ja nämä saatiinkin kätevästi plugareilla joita angulariin saa. Näin ollen kaikki 7 edellistä päivää näkyy graafissa vaikka pelaajia ei olisi ollutkaan. Tässä tuli opittua ettei tietokannasta tiedon kaivaminen näytettäväksi ole aina niin yksinkertaista.</p>
+						</section>
+					</div>
+					<div class="p-3 bg-light" style="height: 100%">
+						<section>
+							<a class="prev" onclick="plusSlides3(-1)">&#10094;</a>
+							<a class="next" onclick="plusSlides3(1)">&#10095;</a>
+							<div class="code2" style="height: 100%">
+								<div class="text-right">1/6</div>
+								<pre>
+<code class="language-javascript">
+	// viikottaiset pelaajat
+	Data.weeklyPlayers = (result) => {
+		sql.query(`SELECT playdatetime, COUNT(id) as playeramount FROM Data GROUP BY YEAR(playdatetime), 
+			MONTH(playdatetime), DAY(playdatetime)`, (err, res) => {
+			if (err) {
+				console.log(err);
+				result(err, null);
+				return;
+			}
+			let days = 7;
+			let data = [];
+
+			for (let i = 0; i < 7; i++) {
+				let datebefore = moment().subtract(days, 'days').format();
+				data[i] = {playdatetime: datebefore, playeramount: 0};
+				days--;
+			}
+
+			for (let i = 0; i < data.length; i++) {
+				let datebefore = data[i].playdatetime.slice(0, 10);
+
+				for (let j = 0; j < res.length; j++) {
+					let date = JSON.stringify(res[j].playdatetime).slice(1, 11);
+					let datedata = res[j];
+					if (date === datebefore) {
+						data[i] = datedata;
+					}
+				}
+			}
+			result(null, data);
+		});
+	}
+</code>
+								</pre>
+								<p>
+									Backend, 
+									tiedoston sijainti: models/Data.js
+								</p>
+								<p>Tietokannasta haetaan päivämäärittäin pelaajamäärät. Tämän jälkeen luodaan tyhjä taulukko joissa pelaajamäärät 0, tähän käytetään moment-plugaria jolla saadaan kätevästi haettua päivämäärä annetulla luvulla taaksepäin. Sitten käydään läpi tietokannasta saatu data ja lisätään tästä datasta tiedot aiemmin luotuun taulukkoon, joilla on sama päivämäärä. data taulukko lähetetään eteenpäin.</p>
+							</div>
+							<div class="code2 slide" style="height: 100%">
+								<div class="text-right">2/6</div>
+								<pre>
+<code class="language-javascript">
+	// pelaajamäärät viimeiset 7 päivää
+	exports.weeklyPlayers = (req, res) => {
+		Data.weeklyPlayers((err, data) => {
+			if (err) {
+				res.status(500).send({
+					message: 'Some error occured while retvieving player amounts for week',
+					success: false
+				});
+			}
+			res.send(data);
+		});
+	}
+</code>
+								</pre>
+								<p>
+									Backend, 
+									tiedoston sijainti: controllers/DataController.js
+								</p>
+								<p>Controlleri-metodi viimeisen 7 päivän pelaajamäärille. Mahdollisen virheen käsittely, jossa viesti ja boolean. Data taulukon välittäminen frontendiin.</p>
+							</div>
+							<div class="code2 slide" style="height: 100%">
+								<div class="text-right">3/6</div>
+								<pre>
+<code class="language-javascript">
+	router.get('/weeklyplayers', dataController.weeklyPlayers);
+</code>
+								</pre>
+								<p>
+									Backend, 
+									tiedoston sijainti: routes/data.js
+								</p>
+								<p>Reitti statistiikan näyttämiseen.</p>
+							</div>
+							<div class="code2 slide" style="height: 100%">
+								<div class="text-right">4/6</div>
+								<pre>
+<code class="language-ts">
+	getWeeklyPlayers(): Observable<any> {
+		return this.http.get<any>(`${this.backendUrl}/weeklyplayers`);
+	  }
+</code>
+								</pre>
+								<p>
+									Frontend, 
+									tiedoston sijainti: services/data.service.ts
+								</p>
+								<p>Servicessä sijaitseva metodi, palautetaan observablena any muotoa, koska data-taulukolle ei ole omaa modeliaan.</p>
+							</div>
+							<div class="code2 slide" style="height: 100%">
+								<div class="text-right">5/6</div>
+								<pre>
+<code class="language-ts">
+	import { DataService } from '../../services/data.service';
+	import { ChartDataSets, ChartOptions } from 'chart.js';
+	import { Color, Label } from 'ng2-charts';
+	
+	playerCountSevenDays: ChartDataSets[] = [{data: [], label: 'Last 7 days'}];
+	playDateSeven: Label[] = [];
+	colors: Color[] = [
+	  {
+		borderColor: 'black',
+		backgroundColor: 'rgba(84,252,32,0.28)',
+	  },
+	];
+	
+	legend = true;
+	plugins = [];
+	playerstype = 'line';
+	
+	  constructor(private data: DataService) { }
+	
+	  // haetaan pelaajamäärä viimeisen 7 päivän ajalta
+	  lastSevenDays() {
+		return this.data.getWeeklyPlayers().subscribe(res => {
+		  for (const r of res) {
+			this.playerCountSevenDays[0].data.push(r.playeramount);
+			this.playDateSeven.push(r.playdatetime.slice(0, 10));
+		  }
+		});
+	  }
+	  ngOnInit(): void {
+		  this.lastSevenDays();
+	  }	
+</code>
+								</pre>
+								<p>
+									Frontend, 
+									tiedoston sijainti: components/statistics.component.ts
+								</p>
+								<p>Graafin vaatimat taulukot ja asetukset, eli taulukon käyttämättä värit, näytetäänkö pisteiden nimet (legend),  sekä graafin tyyppi line. Data-service injektoidaan konstruktorissa, että sitä voidaan hyödyntää komponentissa. lastSevenDays() on statistiikka komponentissa sijaitseva metodi, sillä haetaan servicen metodin avulla taulukkoihin pelaajamäärät, sekä päivämäärät.</p>
+							</div>
+							<div class="code2 slide" style="height: 100%">
+								<div class="text-right">6/6</div>
+								<pre>
+<code class="language-html">
+	<textarea>
+	<div class="container">
+		<div class="px-3 border bg-light">
+			<div>
+				<h4>Player statistics</h4>
+			</div>
+			<ul class="nav nav-tabs">
+				<li class="nav-item"><a class="nav-link" [routerLink]="" (click)="showAllTime()">All time </a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="" (click)="showSeven()">Last 7 days </a></li>
+				<li class="nav-item"><a class="nav-link" [routerLink]="" (click)="showThirty()">Last 30 days</a></li>
+			</ul>
+			<div *ngIf="seven" class="chart-wrapper">
+				<canvas baseChart 
+					[datasets]="playerCountSevenDays" 
+					[labels]="playDateSeven" 
+					[options]="options"
+					[colors]="colors" 
+					[legend]="legend" 
+					[chartType]="playerstype" 
+					[plugins]="plugins">
+				</canvas>
+			</div>
+			</div>
+		</div>
+	</div>
+	</textarea>
+</code>
+								</pre>
+								<p>
+									Frontend, 
+									tiedoston sijainti: components/statistics.component.html
+								</p>
+								<p>Templatessa luodaan canvas, jolla on bindaukset typescript tiedostossa sijaitseviin muuttujiin datan näyttämistä varten.</p>
+							</div>
+						</section>
+					</div>
+					<div>
+						<div class="p-3 bg-light">
+							<section>
+								<h5><b>Yleinen statistiikka</b></h5>
+								<p>Sovelluksessa näytetään myös yleistä statistiikkaa numeromuodossa. Tavoitteena näyttää summia ja keskimääräisiä arvoja. Tietokantakyselyillä saatiin näppärästi eri arvot palautettua backendistä, joten näiden kanssa ei hirveämmin haasteita ollut. Suurimmat haasteet tässä kenties desimaalien ja eri arvojen näyttö oikeassa muodossa. Nämä kuitenkin ratkottiin angularin puolella pipellä ja metodeilla. Tuli kerrattua tietokantakyselyitä tässäkin.</p>
+							</section>
+						</div>
+						<div class="p-3 bg-light" style="height: 100%">
+							<section>
+								<a class="prev" onclick="plusSlides4(-1)">&#10094;</a>
+								<a class="next" onclick="plusSlides4(1)">&#10095;</a>
+								<div class="code3" style="height: 100%">
+									<div class="text-right">1/4</div>
+									<pre>
+<code class="language-javascript">
+	// yleinen statistiikka
+	Data.overallStats = (result) => {
+		sql.query(`SELECT count(id) as sessions, sum(shotbullets) as shotbullets, 
+		sum(bulletshitonenemy) as bullethits,
+		sum(meleehits) as meleehits, sum(meleehitsonenemy) as meleehitsonenemy, 
+		avg(deaths) as avgdeaths,
+		avg(kills) as avgkills, avg(damagetaken) as avgdamagetaken, 
+		avg(damagedealth) as avgdamagedealth FROM Data`, (err, res) => {
+			// käsitellään mahdollinen virhe
+			if (err) {
+				console.log(err);
+				result(err, null);
+				return;
+			}
+
+			// palautetaan vastaus
+			result(null, res);
+		});
+	}
+</code>
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: models/Data.js
+									</p>
+									<p>Tällä kyselyllä kerätään yleinen statistiikka, joka esitetään web-sovelluksessa. Kerätään sessioiden määrä ja muuta erilaista statistiikkaa, yhteismääriä ja keskimääriä. Controllerissa kutsutaan tätä metodia ja routesissa määritetään reitti.</p>
+								</div>
+								<div class="code3 slide" style="height: 100%">
+									<div class="text-right">2/4</div>
+									<pre>
+<code class="language-ts">
+	getAllStatistics(): Observable<any> {
+		return this.http.get<Statistics>(`${this.backendUrl}/overallstats`);
+	  }
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: services/data.service.ts
+									</p>
+									<p>Servicessä määritetään metodi, joka palauttaa observablena statistiikan backendistä.</p>
+								</div>
+								<div class="code3 slide" style="height: 100%">
+									<div class="text-right">3/4</div>
+									<pre>
+<code class="language-ts">
+	import { Statistics } from '../../models/statistics';
+
+	averageGamingtime: number;
+	totalUniquePlayers: number;
+	statistics: Statistics[];
+  
+	constructor(private data: DataService) { }
+  
+	// keskimääräinen peliaika pelaajilla
+	averageGametime() {
+	  return this.data.getAverageGametime().subscribe(res => {
+		this.averageGamingtime = res[0].averagegametime;
+	  });
+	}
+  
+	// kaikki statistiikat
+	getAllStatistics() {
+	  return this.data.getAllStatistics().subscribe(res => {
+		this.statistics = res;
+	  });
+	}
+  
+	// keskimääräinen pelisessioiden määrä pelaajaa kohden
+	averageGameSessionsByPlayer() {
+	  const average = (this.statistics[0].sessions / this.totalUniquePlayers).toFixed(2);
+	  return average;
+	}
+  
+	ngOnInit(): void {
+		this.averageGametime();
+		this.getAllStatistics();
+	}
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: components/statistics.component.ts
+									</p>
+									<p>Importataan statistiikan modeli ja alustetaan muuttujaan statistiikka-taulukko. averageGameTime()-metodissa kutsutaan servicen metodia ja haetaan keskimääräinen peliaika pelaajaa kohden. getAllStatistics()-metodissa kutsutaan servicen metodia, jolla haetaan backendiltä statistiikka ja tallennetaan statistiikka taulukkoon. averageGameSessionsByPlayer()-metodissa lasketaan keskimääräinen pelaajan pelisessiomäärä ja pyöristetään se kahteen desimaaliin.</p>
+								</div>
+								<div class="code3 slide" style="height: 100%">
+									<div class="text-right">4/4</div>
+									<pre>
+<code class="language-html">
+<textarea>
+	<div class="pt-3" *ngFor="let stat of statistics">
+		<table class="table table-dark">
+			<thead>
+				<tr><h4>Overall statistics</h4></tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Total play sessions</td>
+					<td class="text-right">{{ stat.sessions }}</td>
+				</tr>
+				<tr>
+					<td>Total players</td>
+					<td class="text-right">{{ totalUniquePlayers }}</td>
+				</tr>
+				<tr>
+					<td>Total shot bullets</td>
+					<td class="text-right">{{ stat.shotbullets }}</td>
+				</tr>
+				<tr>
+					<td>Total bullet hits on enemy</td>
+					<td class="text-right">{{ stat.bullethits }}</td>
+				</tr>
+				<tr>
+					<td>Total melee hits</td>
+					<td class="text-right">{{ stat.meleehits }}</td>
+				</tr>
+				<tr>
+					<td>Total melee hits on enemy</td>
+					<td class="text-right">{{ stat.meleehitsonenemy }}</td>
+				</tr>
+				<tr><td><h5>Averages in game session</h5></td></tr>
+				<tr>
+					<td>Average game sessions by player</td>
+					<td class="text-right">{{ averageGameSessionsByPlayer() }}</td>
+				</tr>
+				<tr>
+					<td>Average gametime</td>
+					<td class="text-right">{{ time(averageGamingtime) }}</td>
+				</tr>
+				<tr>
+					<td>Average amount of deaths</td>
+					<td class="text-right">{{ stat.avgdeaths | number : '1.2-2' }}</td>
+				</tr>
+				<tr>
+					<td>Average amount of kills</td>
+					<td class="text-right">{{ stat.avgkills | number : '1.2-2' }}</td>
+				</tr>
+				<tr>
+					<td>Average amount of damage taken</td>
+					<td class="text-right">{{ stat.avgdamagetaken | number : '1.2-2' }}</td>
+				</tr>
+				<tr>
+					<td>Average amount of damage on enemies</td>
+					<td class="text-right">{{ stat.avgdamagedealth | number : '1.2-2' }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</textarea>
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: components/statistics.component.html
+									</p>
+									<p>Templatessa statistiikka käydään läpi ngFor-loopilla ja tiedot välitetään interpolaatio-bindauksella templaten taulukon eri kenttiin.</p>
+								</div>
+							</section>
+						</div>
+						<div class="p-3 bg-light">
+							<section>
+								<h5><b>Uutisen lisääminen sivustolle</b></h5>
+								<p>Tavoitteena, että devaajat ja adminit voivat lisätä uutisia sivustolle, sekä uutista lisättäessä voidaan uutiseen liittää kuva ja youtube-videon linkki. Kuva menee cloudinaryyn ja youtube-video upotetaan sivustolle. Haasteena oli kuvatiedoston saaminen uutiseen, sillä tätä ei herokun backendiin voida tallentaa. Ratkaisuna oli käyttää cloudinaryn pilvipalvelua kuvan tallentamiseen ja multeria backendissä auttamaan välimuistin hyödyntämisessä väliaikaiseksi varastopaikaksi kun kuva välitetään frontendistä. Kuva menee bufferina cloudinaryyn, joka muuntaa sen takaisin alkuperäiseen muotoonsa. Tässä tuli opittua backendin toiminnasta tiedostojen siirtoon ja erillisen tiedostopalvelun liittämisestä sovellukseen. Lisäksi reaktiivisten lomakkeiden käyttö angularissa tuli tutuksi.</p>
+							</section>
+						</div>
+						<div class="p-3 bg-light" style="height: 100%">
+							<section>
+								<a class="prev" onclick="plusSlides5(-1)">&#10094;</a>
+								<a class="next" onclick="plusSlides5(1)">&#10095;</a>
+								<div class="code4" style="height: 100%">
+									<div class="text-right">1/4</div>
+									<pre>
+<code class="language-javascript">
+	exports.createNews = (req, res) => {
+		try {
+			let file = '';
+			// uutisten luonti funktio
+			function news() {
+				const news = new News({
+					title: req.body.title,
+					message: req.body.message,
+					userid: req.body.userid,
+					link: req.body.link,
+					date:  new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ''),
+					image: file
+				});
+				News.create(news, (err, data) => {
+					if (err) {
+						res.status(500).send({
+							message: err.message || 'Some error occured while creating the news'
+						});
+					} else {
+						res.send(data);
+					}
+				});
+			}
+			// jos saadaan kuva niin luodaan uutinen sen kanssa
+			if (req.file !== undefined) {
+	
+				cloudinaryConfig();
+				cloudinary.uploader.upload_stream((result) => {
+					file = result.url;
+					news();
+				}).end( req.file.buffer );
+			} else {
+				// muuten luodaan ilman kuvaa
+				news();
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	}
+</code>
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: controllers/WebDataController.js
+									</p>
+									<p>Uutisen luomisen metodi. Ensin tehdään news()-metodi, jota voidaan kutsua kun halutaan luoda uutinen. Tämä siksi, että voidaan cloudinary-linkki sisällyttää uutiseen kun sellainen saadaan. Mikäli requestin (req.file) mukana saadaan lomake-dataa käsittelevältä middlewarelta kuva, niin käynnistetään lataaminen cloudinaryyn. Kuvadata menee cloudinaryyn bufferina, jonka cloudinary muuntaa sitten kuvaksi. Tätä ennen otetaan cloudinaryn tarvitsemat credentialit configista, että tämä olisi mahdollista. Kun on saatu linkki, luodaan uusi uutinen cloudinaryn kuvalinkin kanssa. Mikäli req.file mukana ei saada kuvaa, luodaan uutinen normaalisti.</p>
+								</div>
+								<div class="code4 slide" style="height: 100%">
+									<div class="text-right">2/4</div>
+									<pre>
+<code class="language-javascript">
+	const authorize = require('../helpers/authorize');
+	const role = require('../models/Role');
+	const multerUploads = require('../middleware/multercloud');
+	// uutisen lisääminen
+	router.post('/newsadd', authorize.authorize([role.Admin, role.Developer]), 
+	multerUploads.multerUploads, webdataController.createNews);
+</code>
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: routes/webusers.js
+									</p>
+									<p>Reitti on suojattu rooleilla, joita ovat Admin ja Developer. Middleware multerUploads pitää huolen siitä, että requestin mukana menee lomake-datana kuva, mikäli sellainen välitetään. createNews on controllereissa oleva metodi, joka edellä esiteltiin.</p>
+									<pre>
+<code class="language-javascript">
+	const multer = require('multer');
+
+	const storage = multer.memoryStorage();
+	const multerUploads = multer({storage}).single('image');
+	
+	module.exports = multerUploads;
+</code>
+									</pre>
+									<p>
+										Backend, 
+										tiedoston sijainti: middleware/multercould.js
+									</p>
+									<p>Tämä on melko samanlainen kuin tutoriaalissa, jonka löysin. Käytännössä memoryStorage()-metodi kertoo multerille, että kuva pitää tallentaa muistiin ensin. single(’image’) määrittää minkä niminen on lomakekenttä, josta kuva tulee. Multer myös luo req.file olion.</p>
+								</div>
+								<div class="code4 slide" style="height: 100%">
+									<div class="text-right">3/4</div>
+									<pre>
+<code class="language-ts">
+	newsForm: FormGroup;
+	user = this.auth.getUser();
+  
+	constructor(private fb: FormBuilder, private web: WebdataService, private auth: AuthService, private router: Router) {
+	  this.newsForm = this.fb.group({
+		title: new FormControl('', Validators.required),
+		message: new FormControl('', Validators.required),
+		link: new FormControl(''),
+		image: new FormControl(null)
+	  });
+	}
+  
+	get newsFormControl() {
+	  return this.newsForm.controls;
+	}
+  
+	onFileChanged(event) {
+	  if (event.target.files.length > 0) {
+		const image = event.target.files[0];
+		this.newsForm.get('image').setValue(image);
+	  }
+	}
+  
+	onSubmit() {
+	  const formData = new FormData();
+  
+	  formData.append('title', this.newsForm.get('title').value);
+	  formData.append('message', this.newsForm.get('message').value);
+	  formData.append('userid', this.auth.getUser());
+	  formData.append('link', this.newsForm.get('link').value);
+	  formData.append('image', this.newsForm.get('image').value);
+  
+	  this.web.addNews(formData).subscribe(res => {
+		this.router.navigate(['news']);
+	  });
+	}
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: components/newsadd.component.ts
+									</p>
+									<p>Formbuilderilla luodaan uusi formi ja määritetään sille, että ainakin otsikko ja viesti ovat vaadittuja. Formin controllit palautetaan newsFormControl()-metodilla, nämä ovat validaattoreita varten. onFileChanged()-metodi kuuntelee lisätäänkö lomakkeella kuva, mikäli lisätään, niin kuva laitetaan talteen. onSubmit()-metodissa luodaan uusi formData ja lisätään siihen lomakkeelta saadut tiedot. Tämän jälkeen kutsutaan servicen addNews-metodia, jolla saadaan data lähetettyä backendille.</p>
+								</div>
+								<div class="code4 slide" style="height: 100%">
+									<div class="text-right">4/4</div>
+									<pre>
+<code class="language-html">
+	<textarea>
+	<div class="container">
+		<h1>Add news</h1>
+		<form class="form" [formGroup]="newsForm" (ngSubmit)="onSubmit()">
+	
+			<div class="form-group">
+				<label>Title</label>
+				<input class="form-control" type="text" formControlName="title">
+				<div *ngIf="newsFormControl.title.invalid && (newsFormControl.title.dirty
+				 || newsFormControl.title.touched)">
+					<div class="text-danger" *ngIf="newsFormControl.title.errors.required">
+						Title is required.
+					</div>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label>Message</label>
+				<input class="form-control" type="text" formControlName="message">
+				<div *ngIf="newsFormControl.message.invalid && (newsFormControl.message.dirty
+				 || newsFormControl.message.touched)">
+					<div class="text-danger" *ngIf="newsFormControl.message.errors.required">
+						Message is required.
+					</div>
+				</div>
+			</div>
+	
+			<div class="form-group">
+				<label>Youtube link (short id)</label>
+				<input class="form-control" type="text" formControlName="link">
+			</div>
+	
+			<div class="form-group">
+				<label>Image</label>
+				<input class="form-control" type="file"
+				(change)="onFileChanged($event)"> 
+			</div>
+			
+			<div>
+				<button type="submit" [disabled]="!newsForm.valid">Submit</button>
+			</div>
+		</form>
+	</div>
+	</textarea>
+</code>
+									</pre>
+									<p>
+										Frontend, 
+										tiedoston sijainti: components/newsadd.component.html
+									</p>
+									<p>Uutisen lisäämisen formi. Submit painiketta ei näytetä mikäli otsikko tai viesti puuttuu. Kuvatiedoston onFileChanged() on bindattu kuuntelemaan muutoksia siitä, mikäli kenttään valitaan jokin tiedosto.</p>
+							</section>
+						</div>
+						<div class="p-3 bg-light">
+							<section>
+								<h5><b>Roolipohjainen reittien suojaus</b></h5>
+								<p>Tavoitteena saada reitit suojattua käyttäjän roolien perusteella. Tutoriaalia hyödynnetty kun tehtiin tätä reittien suojausta. Ongelmana oli saada ratkaisusta sellainen, että montaa eri metodia ei tarvittaisi ja vähäisellä koodauksella, mutta roolipohjainen suojaus reitille saataisiin tehtyä. Ratkaisuna oli, että välitetään roolit reitillä olevalle metodille, tämä oli aika yksinkertainen, mutta nokkela ratkaisu (saman tyylistä ratkaisua käytetään myös frondendin puolella guardin kanssa). Näitä reitillä välitettyjä rooleja vertaillaan käyttäjän tokenissa olevaan rooliin ja tämän perusteella myönnetään tai evätään pääsy reitille. Tässä tuli opittua juurikin roolipohjaisesta reittien suojauksesta.</p>
+								<p>Reittien suojaus tapahtui authorize metodilla, jolle välitetään taulukko rooleista. Returnissa katsotaan vastaako rooli tokenissa olevaa roolia. Jos tokenia ei saada, hylätään pääsy. Jos token saadaan, niin se puretaan ja katsotaan onko rooli sama kuin metodiin annetuissa rooleissa. Jos ei, niin hylätään pääsy ja mikäli roolille löytyy vastaavuus, niin päästetään eteenpäin.</p>
+							</section>
+						</div>
+						<div class="p-3 bg-light" style="height: 100%">
+							<section>
+									<pre>
+<code class="language-javascript">
+	const jwt = require('jsonwebtoken');
+
+	exports.authorize = (roles = []) => {
+		if (typeof roles === 'string') {
+			roles = [roles];
+		}
+	
+		return [
+			
+			(req, res, next) => {
+	
+				// otetaan token vastaan headereista
+				const token = req.headers['authorization'];
+	
+				// jos ei tokenia niin ei päästetä läpi
+				if (!token) {
+					return res.status(401).json({
+						auth: false,
+						message: 'Did not deliver token'
+					});
+				}
+	
+				// verifoidaan token
+				jwt.verify(token, process.env.SECRET, (err, decoded) => {
+					// jos error, niin palautetaan sellainen
+					if (err) {
+						console.log(err);
+						return res.status(401).json({
+							auth: false,
+							error: err,
+							message: 'Error in authorization'
+						});
+					}
+					// tarkastetaan onko roolia, jos ei niin ei päästetä läpi
+					if (roles.length && !roles.includes(decoded.role)) {
+						return res.status(401).json({
+							auth: false,
+							message: 'Unauthorized'
+						});
+					}
+					// mennään eteen päin jos kaikki kunnossa
+					next();
+				});
+			}
+		];
+	}
+</code>
+									</pre>
+							</section>
+						</div>
+				<div>
+		</div>
+			<div>
+				<div class="p-3 bg-light">
+					<section>
+						<h5><b>Sivutyö projektissa</b></h5>
+						<p>Tein projektissa sivutyönä musiikkia ja ääniä peliin. Näitä töitä tein yhteensä 5 viikkoa opintojaksosta ja sainkin aikaan varsin paljon kyseisissä töissä aikaan nähden. Olen myös tyytyväinen musiikkiin, jota sain tehdä peliin. Äänien tekeminen oli mielenkiintoinen kokemus ja siinä sai käyttää mielikuvitusta paljon, kun mietiskeli kuinka äänen tekisi aina mihinkin tilanteeseen. Monsterin äänien työstäminen oli ehkä haastavinta ja siinä joutui layeroimaan ääniä paljon. Juuri äänien tekemisestä opinkin tässä sivutyössä eniten.</p>
+						<p>Musiikin tekemisestä opin ambientin tekemistä ja drum&bass tyylisen musiikin tekemistä. Musiikin tekeminenkin voi olla haastavaa jos oikeat instrumentit puuttuvat. Minulla kuitenkin oli puitteet kohdallaan näiltä osin ja sain tehtyä tarvittavan tyylistä musiikkia. Perehtyminen uusiin genreihin ja niiden opiskelu on aikaa vievää, mutta yleensä niiden tekeminen rupeaa sujumaan kun perehtyy tarpeeksi tyylilajien ominaisuuksiin.</p>
+						<p>Kaiken kaikkiaan äänityöskentely projektin parissa oli varsin mukavaa.</p>
+						<p>Seuraavaksi muutamia näytteitä, joissa musiikista miltei kaikki, mutta äänistä vain muutama.</p>
+					</section>
+					<section>
+						<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1043207815&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-231552178" title="Ghost of the old oak" target="_blank" style="color: #cccccc; text-decoration: none;">Ghost of the old oak</a> · <a href="https://soundcloud.com/user-231552178/sets/virtual-shock-music" title="Virtual Shock Music" target="_blank" style="color: #cccccc; text-decoration: none;">Virtual Shock Music</a></div>
+					</section>
+					<section>
+						<iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1043209486&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/user-231552178" title="Ghost of the old oak" target="_blank" style="color: #cccccc; text-decoration: none;">Ghost of the old oak</a> · <a href="https://soundcloud.com/user-231552178/sets/virtual-shock-sounds" title="Virtual Shock Sounds" target="_blank" style="color: #cccccc; text-decoration: none;">Virtual Shock Sounds</a></div>
+					</section>
+					<!--
+					<section>
+						<p><b>Näytteet kappaleista</b></p>
+						<div class="row">
+							<div class="col-sm">
+								<p>Ambient 1:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/ambient1.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Ambient 2:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/ambient2.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Fx music 1:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/fx_music1.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<p>Fx music 2:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/fx_music2.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Fx music 3:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/fx_music3.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Techno 1:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/tekno1.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<p>Techno 2:</p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/tekno2final.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+					</section>
+					<section class="pt-3">
+						<p><b>Näytteet äänistä</b></p>
+						<div class="row">
+							<div class="col-sm">
+								<p>Big door: </p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/bigdoor.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Small door: </p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/smalldoor.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+							<div class="col-sm">
+								<p>Monster war: </p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/monsterwar.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<p>Monster death: </p>
+								<audio controls controlsList="nodownload">
+									<source src="audio/monsterdeath.mp3" type="audio/mpeg">
+								</audio>
+							</div>
+						</div>
+					</section>
+					-->
+				</div>
+				<div class="p-3 bg-light">
+					<section>
+						<h5><b>Projektin oppimistavoitteet</b></h5>
+						<p>Tavoitteena oli oppia lisää websovelluskehityksestä ja työstää ohessa pelimusiikkia, sekä oppia äänien tekemisestä. Opin lisää websovelluskehityksestä paljon, sillä tekemistä tässä projektissa riitti ja se tarjosi sisällöltään monipuolisesti opittavaa. Musiikin puolelta ja äänien puolelta löytyi myös tekemistä paljon, työn määrä kasvoi projektin edetessä ja monipuolisesti pääsi tekemään. Oppimistavoitteisiin pääsin mielestäni hyvin, mutta tietenkin paljon on vielä opittavaa tulevaisuutta ajatellen.</p>
+					</section>
+				</div>
+				<div class="p-3 bg-light">
+					<section>
+						<h5><b>Reflektio</b></h5>
+						<p>Aikaisempi kokemus ohjelmoinnista on enimmäkseen koulutöiden parissa. Tämän tyyppiseen fullstack-kehittämiseen kuitenkin minulla on kokemusta vain websovellus-kurssin lopputyön muodossa ja tämä demolabin sovellus oli mitoiltaan huomattavasti suurempi ja tarjosi erilaisia haasteita projektin edetessä. Lisäksi jonkin verran työtä, joka toistui eri osissa sovellusta, joten jonkinlainen rutiini tuli tekemiseen ja aina ei ollut aikaa opiskella hienompaa tyyliä tehdä asioita koodissa, koska työn määrä oli melkoisen suuri. Ongelmien vastaan tullessa ratkaisun löytäminen vei yleensä tunteja aikaa ja toisinaan saattoi olla, että löysin vain yhden ratkaisun, joka toimi kyseisessä tilanteessa. Sain kuitenkin ongelmat ratkaistua ja olen siihen tyytyväinen.</p>
+						<p>Tässä portfoliossa esitellyt asiat ovat vain osa siitä mitä tein sovellukseen, mutta niissä on mielestäni hyviä asioita, joista näkee ratkaisuja, mitä olen tehnyt. Kuitenkin muitakin hienoja asioita opin kuten roolipohjaisen reittien suojauksen angularin puolella, formin upottamisen taulukkoon, jonkin verran promiseiden kanssa työskentelystä, modalien käytön, resolverin käytön, jolla saadaan ladattua sivun sisältö ennen kuin varsinainen komponentti avataan ja niin edelleen. MySQL käyttö noden kanssa ei ollut kovinkaan tuttua, joten sen kanssa työskentely oli myös uutta ja siihen liittyvien käytänteiden opiskelu.</p>
+						<p>Olen mielestäni kehittynyt websovelluskehityksessä ja en tarvitse enää niin paljon tutoriaalien ja googlen apua kuin aikaisemmin, eli kehitystä on tapahtunut. Minulla on parempi kuva sovelluksien rakenteista ja ratkaisuista, kuinka asiat voi hoitaa. Tutkin kuitenkin mieluusti asioita ennen kuin käyn tekemään toteutusta joten, tietysti uusien asioiden vastaan tullessa turvaudun etsimään tietoa googlen avulla. Osaan myös etsiä tietoa tehokkaammin, sillä sitä tuli tehtyä paljon tämän projektin parissa.</p>
+						<p>Tunnistan myös oppimisen tarpeita omissa sovelluskehitystaidoissa. Seuraavia asioita voisin listata, joihin pitää perehtyä tarkemmin: asyncroninen ohjelmointi, virheiden käsittely, paremmat ohjelmointi käytänteet, sillä välillä koodia tuli toistettua ja varmasti ylimääräisiä rivejä syntyi. Angularin puolella custom pipet ja interceptorit paremmin haltuun. .net/asp.net-sovelluksien kehittäminen. Viimeisenä mainittuja olen kuullut työelämässä käytettävän, joten niiden opiskelu on hyödyllistä.</p>
+						<p>Huomasin työskennellessäni, että 5-6 tuntia pystyn tekemään ohjelmoinnin kaltaista työstentelyä, tämän jälkeen alkaa työteho laskemaan, vaikka töitä pystyykin jatkamaan.</p>
+						<p>Tulevaisuudessa haluaisin työskennellä websovelluskehityksen parissa, mutta miksei myös äänityöskentelyn parissa, sillä molemmat ovat mielestäni palkitsevia.</p>
+					</section>
+				</div>
+			</div>
+			</div>
+			<!-- footer section -->
+			<div>
+				<footer>
+				<span>
+					
+				</span>
+				</footer>
+			</div>
+		</div>
+		<!-- scripts -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<script src="scripts/prism.js"></script>
+		<script src="scripts/karuselli.js"></script>
+	</body>
+</html>
